@@ -56,6 +56,7 @@ NSString* const CDVViewWillTransitionToSizeNotification = @"CDVViewWillTransitio
 
 @property (readwrite, assign) BOOL hasPendingOperation;
 @property (nonatomic, readwrite, weak) id <CDVWebViewEngineProtocol> webViewEngine;
+-(void) apply_stuff_to_configuration:(id) configuration;
 
 @end
 
@@ -101,9 +102,6 @@ NSString* const CDVViewWillTransitionToSizeNotification = @"CDVViewWillTransitio
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillLayoutSubviews:) name:CDVViewWillLayoutSubviewsNotification object:nil];
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLayoutSubviews:) name:CDVViewDidLayoutSubviewsNotification object:nil];
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillTransitionToSize:) name:CDVViewWillTransitionToSizeNotification object:nil];
-}
-- (void)apply_stuff_to_configuration: (id) configuration{
-
 }
 
 - (void)dispose
