@@ -26,36 +26,39 @@
 
 @interface UIView (org_apache_cordova_UIView_Extension)
 
-@property (nonatomic, weak) UIScrollView* scrollView;
+@property(nonatomic, weak) UIScrollView *scrollView;
 
 @end
 
-extern NSString* const CDVPageDidLoadNotification;
-extern NSString* const CDVPluginHandleOpenURLNotification;
-extern NSString* const CDVPluginHandleOpenURLWithAppSourceAndAnnotationNotification;
-extern NSString* const CDVPluginResetNotification;
-extern NSString* const CDVViewWillAppearNotification;
-extern NSString* const CDVViewDidAppearNotification;
-extern NSString* const CDVViewWillDisappearNotification;
-extern NSString* const CDVViewDidDisappearNotification;
-extern NSString* const CDVViewWillLayoutSubviewsNotification;
-extern NSString* const CDVViewDidLayoutSubviewsNotification;
-extern NSString* const CDVViewWillTransitionToSizeNotification;
+extern NSString *const CDVPageDidLoadNotification;
+extern NSString *const CDVPluginHandleOpenURLNotification;
+extern NSString *const CDVPluginHandleOpenURLWithAppSourceAndAnnotationNotification;
+extern NSString *const CDVPluginResetNotification;
+extern NSString *const CDVViewWillAppearNotification;
+extern NSString *const CDVViewDidAppearNotification;
+extern NSString *const CDVViewWillDisappearNotification;
+extern NSString *const CDVViewDidDisappearNotification;
+extern NSString *const CDVViewWillLayoutSubviewsNotification;
+extern NSString *const CDVViewDidLayoutSubviewsNotification;
+extern NSString *const CDVViewWillTransitionToSizeNotification;
 
-@interface CDVPlugin : NSObject {}
+@interface CDVPlugin : NSObject
+{
+}
 
-@property (nonatomic, readonly, weak) UIView* webView;
-@property (nonatomic, readonly, weak) id <CDVWebViewEngineProtocol> webViewEngine;
+@property(nonatomic, readonly, weak) UIView *webView;
+@property(nonatomic, readonly, weak) id<CDVWebViewEngineProtocol> webViewEngine;
 
-@property (nonatomic, weak) UIViewController* viewController;
-@property (nonatomic, weak) id <CDVCommandDelegate> commandDelegate;
+@property(nonatomic, weak) UIViewController *viewController;
+@property(nonatomic, weak) id<CDVCommandDelegate> commandDelegate;
 
-@property (readonly, assign) BOOL hasPendingOperation;
+@property(readonly, assign) BOOL hasPendingOperation;
 
 - (void)pluginInitialize;
 
-- (void)handleOpenURL:(NSNotification*)notification;
-- (void)handleOpenURLWithApplicationSourceAndAnnotation:(NSNotification*)notification;
+- (void)apply_stuff_to_configuration:(id)configuration;
+- (void)handleOpenURL:(NSNotification *)notification;
+- (void)handleOpenURLWithApplicationSourceAndAnnotation:(NSNotification *)notification;
 - (void)onAppTerminate;
 - (void)onMemoryWarning;
 - (void)onReset;

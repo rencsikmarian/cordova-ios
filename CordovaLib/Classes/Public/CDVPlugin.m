@@ -56,7 +56,6 @@ NSString* const CDVViewWillTransitionToSizeNotification = @"CDVViewWillTransitio
 
 @property (readwrite, assign) BOOL hasPendingOperation;
 @property (nonatomic, readwrite, weak) id <CDVWebViewEngineProtocol> webViewEngine;
--(void) apply_stuff_to_configuration:(id) configuration;
 
 @end
 
