@@ -103,6 +103,8 @@ NSString* const CDVViewWillTransitionToSizeNotification = @"CDVViewWillTransitio
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillTransitionToSize:) name:CDVViewWillTransitionToSizeNotification object:nil];
 }
 
+- (void)apply_stuff_to_configuration:(id)configuration{}
+
 - (void)dispose
 {
     viewController = nil;
