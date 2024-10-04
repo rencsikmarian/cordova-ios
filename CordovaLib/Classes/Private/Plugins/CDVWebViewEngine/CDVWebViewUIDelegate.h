@@ -17,16 +17,26 @@
  under the License.
  */
 
-@import WebKit;
+#import <WebKit/WebKit.h>
 
+#ifdef NS_SWIFT_UI_ACTOR
+#define CDV_SWIFT_UI_ACTOR NS_SWIFT_UI_ACTOR
+#else
+#define CDV_SWIFT_UI_ACTOR
+#endif
+
+@class CDVViewController;
+
+NS_ASSUME_NONNULL_BEGIN
+
+CDV_SWIFT_UI_ACTOR
 @interface CDVWebViewUIDelegate : NSObject <WKUIDelegate>
-{
-    NSMutableArray<UIViewController*>* windows;
-}
 
-@property (nonatomic, copy) NSString* title;
+@property (nonatomic, nullable, copy) NSString* title;
 @property (nonatomic, assign) BOOL allowNewWindows;
 
-- (instancetype)initWithTitle:(NSString*)title;
+- (instancetype)initWithViewController:(CDVViewController*)vc;
 
 @end
+
+NS_ASSUME_NONNULL_END
