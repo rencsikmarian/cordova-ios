@@ -22,6 +22,7 @@ const { CordovaError, events } = require('cordova-common');
 const build = require('../../../lib/build');
 const check_reqs = require('../../../lib/check_reqs');
 const run = require('../../../lib/run');
+const projectFile = require('../../../lib/projectFile');
 
 describe('cordova/lib/run', () => {
     const testProjectPath = path.join('/test', 'project', 'path');
@@ -34,22 +35,22 @@ describe('cordova/lib/run', () => {
         beforeEach(() => {
             spyOn(events, 'emit');
             spyOn(run, 'execListDevices').and.returnValue(Promise.resolve(['iPhone Xs']));
-            spyOn(run, 'execListEmulatorTargets').and.returnValue(Promise.resolve(['iPhone 15 Simulator']));
+            spyOn(run, 'execListEmulatorImages').and.returnValue(Promise.resolve(['iPhone 15 Simulator']));
         });
 
         it('should delegate to "listDevices" when the "runListDevices" method options param contains "options.device".', () => {
             return run.runListDevices({ options: { device: true } }).then(() => {
                 expect(run.execListDevices).toHaveBeenCalled();
-                expect(run.execListEmulatorTargets).not.toHaveBeenCalled();
+                expect(run.execListEmulatorImages).not.toHaveBeenCalled();
 
                 expect(events.emit).toHaveBeenCalledWith('log', '\tiPhone Xs');
             });
         });
 
-        it('should delegate to "listDevices" when the "runListDevices" method options param contains "options.emulator".', () => {
+        it('should delegate to "listEmulators" when the "runListDevices" method options param contains "options.emulator".', () => {
             return run.runListDevices({ options: { emulator: true } }).then(() => {
                 expect(run.execListDevices).not.toHaveBeenCalled();
-                expect(run.execListEmulatorTargets).toHaveBeenCalled();
+                expect(run.execListEmulatorImages).toHaveBeenCalled();
 
                 expect(events.emit).toHaveBeenCalledWith('log', '\tiPhone 15 Simulator');
             });
@@ -58,7 +59,7 @@ describe('cordova/lib/run', () => {
         it('should delegate to both "listEmulators" and "listDevices" when the "runListDevices" method does not contain "options.device" or "options.emulator".', () => {
             return run.runListDevices().then(() => {
                 expect(run.execListDevices).toHaveBeenCalled();
-                expect(run.execListEmulatorTargets).toHaveBeenCalled();
+                expect(run.execListEmulatorImages).toHaveBeenCalled();
 
                 expect(events.emit).toHaveBeenCalledWith('log', '\tiPhone Xs');
                 expect(events.emit).toHaveBeenCalledWith('log', '\tiPhone 15 Simulator');
@@ -67,11 +68,19 @@ describe('cordova/lib/run', () => {
     });
 
     describe('run method', () => {
+        const fakeXcodeProject = {
+            xcode: {
+                getBuildProperty (n, c, t) {
+                    return 'ProjectName';
+                }
+            }
+        };
+
         beforeEach(() => {
             spyOn(build, 'run').and.returnValue(Promise.resolve());
-            spyOn(build, 'findXCodeProjectIn').and.returnValue('ProjectName');
+            spyOn(projectFile, 'parse').and.returnValue(fakeXcodeProject);
             spyOn(run, 'execListDevices').and.resolveTo([]);
-            spyOn(run, 'execListEmulatorTargets').and.resolveTo([]);
+            spyOn(run, 'execListEmulatorImages').and.resolveTo([]);
             spyOn(run, 'listDevices').and.resolveTo();
             spyOn(run, 'deployToMac').and.resolveTo();
             spyOn(run, 'deployToSim').and.resolveTo();

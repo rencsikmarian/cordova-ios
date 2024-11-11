@@ -17,9 +17,13 @@
  under the License.
 */
 
-import Cordova
+import UIKit
 
-@objc(MainViewController) // Remove compat hack in Cordova iOS 9
-class ViewController: CDVViewController {
+@main
+@_objcImplementation
+extension AppDelegate {
+    open override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
 }
 

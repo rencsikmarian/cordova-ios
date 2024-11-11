@@ -34,14 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
  behavior to the app by building on system events such as URL handling, push
  notification registration, and deep linking.
 
- See ``UIApplicationDelegate`` for more details about app delegates.
+ See `UIApplicationDelegate` for more details about app delegates.
  */
 @interface CDVAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nullable, nonatomic, strong) IBOutlet UIWindow *window API_DEPRECATED_WITH_REPLACEMENT("SceneDelegate:window", ios(2.0, 13.0));
 
 // TODO: Remove in Cordova iOS 9
-@property (nullable, nonatomic, strong) IBOutlet CDVViewController *viewController CDV_DEPRECATED(8, "This will always be nil.");
+@property (nullable, nonatomic, strong) IBOutlet CDVViewController *viewController CDV_DEPRECATED(8, "");
 
 @end
 
